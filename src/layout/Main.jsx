@@ -12,7 +12,7 @@ class Main extends React.Component {
 	};
 
 	componentDidMount() {
-		fetch(`http://www.omdbapi.com/?apikey=${API_KEY}0&s=avatar`)
+		fetch(`http://www.omdbapi.com/?apikey=${API_KEY}&s=avatar`)
 			.then((res) => res.json())
 			.then((data) =>
 				this.setState({
