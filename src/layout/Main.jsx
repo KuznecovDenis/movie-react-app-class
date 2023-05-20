@@ -12,20 +12,26 @@ class Main extends React.Component {
 	};
 
 	componentDidMount() {
-		fetch(`http://www.omdbapi.com/?apikey=${API_KEY}&s=avatar`)
+		fetch(`https://www.omdbapi.com/?apikey=${API_KEY}&s=avatar`)
 			.then((res) => res.json())
 			.then((data) =>
 				this.setState({
 					movies: data.Search,
 					isLoading: false,
 				})
-			);
+			)
+			.catch((err) => {
+				console.error(err);
+				this.setState({
+					isLoading: false,
+				});
+			});
 	}
 
 	searchMovies = (searchStr, type) => {
 		this.setState({ isLoading: true });
 		fetch(
-			`http://www.omdbapi.com/?apikey=${API_KEY}&s=${searchStr}${
+			`https://www.omdbapi.com/?apikey=${API_KEY}&s=${searchStr}${
 				type !== 'all' ? `&type=${type}` : ''
 			}`
 		)
@@ -35,7 +41,13 @@ class Main extends React.Component {
 					movies: data.Search,
 					isLoading: false,
 				})
-			);
+			)
+			.catch((err) => {
+				console.error(err);
+				this.setState({
+					isLoading: false,
+				});
+			});
 	};
 
 	render() {
